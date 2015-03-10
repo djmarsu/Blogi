@@ -1,1 +1,2 @@
--- Lisää INSERT INTO lauseet tähän tiedostoon
+INSERT INTO Kayttaja (name, password) VALUES ('niku', 'joo');
+INSERT INTO Kayttaja (name, password) VALUES ('blaa', 'hmm');

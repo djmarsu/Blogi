@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Kirjaudu sisään</h1>
+  <h1>Rekisteröidy</h1>
 
-  <form action="/login" method="post" style="margin-bottom: 50px;">
+  <form action="/signup" method="post">
     <div class="form-group">
       <label>Käyttäjätunnus</label>
       <input class="form-control" type="text">
@@ -13,10 +13,6 @@
       <input class="form-control" type="password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    <button type="submit" class="btn btn-primary">Rekisteröidy</button>
   </form>
-
-  <p>
-    <a href="signup">Voit rekisteröityä täältä</a>
-  </p>
 {% endblock %}
