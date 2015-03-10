@@ -32,13 +32,13 @@
 
     public static function register() {
       $params = $_POST;
-/*
+
       $attributes = array(
-	'nimi' => $params['nimi'];
+	'nimi' => $params['nimi'],
 	'salasana' => $params['salasana']
       );
-*/
-      //self::redirect_to('/', array('message' => 'onnistuiii'));
-      self::redirect::to('/login');
+
+      Redirect::to('/', array('message' => 'onnistuiii'));
+      //self::Redirect::to('/login');
     }
   }

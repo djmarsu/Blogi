@@ -21,9 +21,9 @@
   });
 
   $routes->post('/signup', function() {
-    HelloWorldController::register();
+    KayttajaController::register();
   });
 
   $routes->get('/signup', function() {
-    HelloWorldController::signup();
+    KayttajaController::signup();
   });
