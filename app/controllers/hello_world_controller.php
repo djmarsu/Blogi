@@ -29,4 +29,16 @@
     public static function signup() {
       View::make('signup.html');
     }
+
+    public static function register() {
+      $params = $_POST;
+/*
+      $attributes = array(
+	'nimi' => $params['nimi'];
+	'salasana' => $params['salasana']
+      );
+*/
+      //self::redirect_to('/', array('message' => 'onnistuiii'));
+      self::redirect::to('/login');
+    }
   }

@@ -20,6 +20,10 @@
     HelloWorldController::edit();
   });
 
+  $routes->post('/signup', function() {
+    HelloWorldController::register();
+  });
+
   $routes->get('/signup', function() {
     HelloWorldController::signup();
   });
