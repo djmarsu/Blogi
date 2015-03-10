@@ -1,2 +1,2 @@
-INSERT INTO Kayttaja (name, password) VALUES ('niku', 'joo');
-INSERT INTO Kayttaja (name, password) VALUES ('blaa', 'hmm');
+INSERT INTO Kayttaja (nimi, salasana) VALUES ('niku', 'joo');
+INSERT INTO Kayttaja (nimi, salasana) VALUES ('blaa', 'hmm');
