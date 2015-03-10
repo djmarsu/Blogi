@@ -13,7 +13,7 @@
       echo 'Hello World!';
     }
 
-    public statin function login() {
+    public static function login() {
       View:make('login.html');
     }
   }
