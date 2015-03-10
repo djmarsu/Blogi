@@ -14,6 +14,6 @@
     }
 
     public static function login() {
-      View:make('login.html');
+      View::make('login.html');
     }
   }
