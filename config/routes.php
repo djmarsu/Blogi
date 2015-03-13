@@ -28,6 +28,10 @@
     KayttajaController::signup();
   });
 
-  $routes->get('/blogi/:bloginnimi', function($bloginnimi) {
-    BlogiController::show($bloginnimi);
+  $routes->get('/kokeilu', function() {
+		BlogiController::showkokeilu();
+	});
+
+  $routes->get('/blogi/:nimi', function($nimi) {
+    BlogiController::show($nimi);
   });
