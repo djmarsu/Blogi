@@ -27,3 +27,7 @@
   $routes->get('/signup', function() {
     KayttajaController::signup();
   });
+
+  $routes->get('/blogi/:bloginnimi', function($bloginnimi) {
+    BlogiController::show($bloginnimi);
+  });
