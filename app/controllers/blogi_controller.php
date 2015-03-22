@@ -8,6 +8,14 @@ class BlogiController extends BaseController {
 	   Redirect::to('/', array('message' => 'onnistuiii'));
 	}
 
+	public static function etusivu() {
+		View::make('etusivu.html');
+	}
+
+	public static function postaus() {
+		View::make('postaus.html');
+	}
+
 /*  public static function showkokeilu() {
     $kokeiluvaan = Blogi::find("tes");
 		View::make('blogietusivu.html');

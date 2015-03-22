@@ -8,3 +8,7 @@
   max-width: 1200px;
   margin: 0px auto;
 }
+
+.pos {
+	border-bottom: 1px dotted;
+}
