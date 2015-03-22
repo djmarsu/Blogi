@@ -20,6 +20,10 @@ class BlogiController extends BaseController {
 		View::make('postaus_muokkaus.html');
 	}
 
+	public static function listaus() {
+		View::make('listaus.html');
+	}
+
 /*  public static function showkokeilu() {
     $kokeiluvaan = Blogi::find("tes");
 		View::make('blogietusivu.html');

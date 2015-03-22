@@ -13,6 +13,10 @@
 	  BlogiController::postaus_muokkaus();
   });
 
+  $routes->get('/listaus', function() {
+	  BlogiController::listaus();
+  });
+
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
