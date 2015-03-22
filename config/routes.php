@@ -9,6 +9,10 @@
     BlogiController::postaus();
   });
 
+  $routes->get('/postaus/muokkaa', function() {
+	  BlogiController::postaus_muokkaus();
+  });
+
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });

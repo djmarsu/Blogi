@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="yksittainen">
+  <h1>Muokkaa postausta Postauksen nimi tässä</h1>
+
+  <form>
+	  <div class="form-group">
+	  <label>Otsikko</label>
+	  <input class="form-control" value="Postauksen nimi tässä" type="text">
+	  </div>
+
+	  <div class="form-group">
+          <label>Teksti</label>
+	  <textarea class="form-control">tässä tekstiä</textarea>
+	  </div>
+
+	  <div class="checkbox">
+		  <label>
+			  <input type="checkbox">
+			  Piilotettu
+		  </label>
+	  </div>
+
+	  <div class="form-group">
+		  <button type="submit" class="btn btn-primary">Tallenna</button>
+	  </div>
+  </form>
+
+  <p style="color: grey;">13.3.2015</p>
+</div>
+{% endblock %}
