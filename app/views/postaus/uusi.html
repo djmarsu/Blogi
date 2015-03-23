@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="yksittainen">
+  <h1>Kirjoita uusi merkintä</h1>
+
+  <form method="post" action="{{base_path}}/postaus/uusi">
+	  <div class="form-group">
+	  <label>Otsikko</label>
+	  <input class="form-control" name="otsikko" type="text">
+	  </div>
+
+	  <div class="form-group">
+          <label>Teksti</label>
+	  <textarea class="form-control" name="leipateksti"></textarea>
+	  </div>
+
+	  <div class="form-group">
+		  <button type="submit" class="btn btn-primary">Tallenna</button>
+	  </div>
+  </form>
+</div>
+{% endblock %}

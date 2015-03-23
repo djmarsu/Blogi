@@ -13,6 +13,14 @@
 	  BlogiController::postaus_muokkaus();
   });
 
+  $routes->post('/postaus/uusi', function() {
+    PostausController::store();
+  });
+
+  $routes->get('/postaus/uusi', function() {
+    PostausController::create();
+  });
+
   $routes->get('/listaus', function() {
 	  BlogiController::listaus();
   });
