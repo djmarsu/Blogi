@@ -2,7 +2,8 @@
 
   $routes->get('/', function() {
     //HelloWorldController::index();
-    BlogiController::etusivu();
+    //BlogiController::etusivu();
+    PostausController::index();
   });
 
   $routes->get('/postaus', function() {

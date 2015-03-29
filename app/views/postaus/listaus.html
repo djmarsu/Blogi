@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{{base_path}}/postaus/uusi">Lisää uusi</a>
+
+{% for postaus in postaukset %}
+  {% if postaus.julkaistu == 'y' %}
+  <div class="pos">
+    <h1><a href="#">{{postaus.otsikko}}</a></h1>
+
+    <p>{{postaus.leipateksti}}</p>
+
+    <p style="color: grey;">13.3.2015TEE TÄÄ</p>
+  </div>
+  {% endif %}
+{% endfor %}
+{% endblock %}
