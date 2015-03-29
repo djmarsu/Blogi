@@ -31,4 +31,30 @@ class Postaus extends BaseModel {
 
     return $postaukset;
   }
+
+  public static function find($id) {
+    $query = DB::connection()->prepare('SELECT * FROM Postaus WHERE id = :id LIMIT 1');
+    $query->execute(array('id' => $id));
+    $row = $query->fetch();
+
+    if ($row) {
+      $postaus = new Postaus(array(
+        'id' => $row['id'],
+        'blogi' => $row['blogi'],
+        'pvm' => $row['pvm'],
+        'otsikko' => $row['otsikko'],
+        'leipateksti' => $row['leipateksti'],
+        'julkaistu' => $row['julkaistu']
+      ));
+      return $postaus;
+    }
+
+    return null;
+  }
+
+  public static function save() {
+    $query = DB::connection()->prepare("INSERT INTO Postaus (id, blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('9', 'koolo', date '2001-09-28', 'morooo', 'blaah blaah laa', 'y')");
+
+    $query->execute();
+  }
 }

@@ -6,11 +6,11 @@
 {% for postaus in postaukset %}
   {% if postaus.julkaistu == 'y' %}
   <div class="pos">
-    <h1><a href="#">{{postaus.otsikko}}</a></h1>
+    <h1><a href="{{base_path}}/postaus/{{postaus.id}}">{{postaus.otsikko}}</a></h1>
 
     <p>{{postaus.leipateksti}}</p>
 
-    <p style="color: grey;">13.3.2015TEE TÄÄ</p>
+    <p style="color: grey;">{{postaus.pvm}}</p>
   </div>
   {% endif %}
 {% endfor %}

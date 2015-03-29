@@ -57,3 +57,9 @@
   $routes->get('/blogi/:nimi', function($nimi) {
     BlogiController::show($nimi);
   });
+
+  $routes->get('/postaus/:id', function($id) { // pitääkö tän olla perimmäisenäää????????
+    PostausController::show($id);
+  });
+
+ 
