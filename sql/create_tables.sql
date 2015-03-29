@@ -10,7 +10,7 @@ CREATE TABLE Blogi(
 );
 
 CREATE TABLE Postaus(
-  id integer PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   blogi varchar(50) NOT NULL REFERENCES Blogi(nimi),
   pvm Date NOT NULL,
   otsikko varchar(200),

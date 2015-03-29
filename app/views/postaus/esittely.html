@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if postaus.julkaistu == 'y' %}
+  <div class="pos">
+    <h1><a href="#">{{postaus.otsikko}}</a></h1>
+
+    <p>{{postaus.leipateksti}}</p>
+
+    <p style="color: grey;">{{postaus.pvm}}</p>
+  </div>
+  {% endif %}
+{% endblock %}
