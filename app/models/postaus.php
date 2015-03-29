@@ -52,9 +52,12 @@ class Postaus extends BaseModel {
     return null;
   }
 
-  public static function save() {
-    $query = DB::connection()->prepare("INSERT INTO Postaus (id, blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('9', 'koolo', date '2001-09-28', 'morooo', 'blaah blaah laa', 'y')");
+  public function save() {
+//    $query = DB::connection()->prepare("INSERT INTO Postaus (id, blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('9', 'koolo', date '2001-09-28', 'morooo', 'blaah blaah laa', 'y')");
+    $query = DB::connection()->prepare("INSERT INTO Postaus (blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('koolo', current_date, :otsikko, :leipateksti, 'y')");
 
-    $query->execute();
+    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti));
+ 
+//    $query->execute();
   }
 }

@@ -19,16 +19,16 @@ class PostausController extends BaseController {
     $params = $_POST;
 
     $postaus = new Postaus(array(
-      'id' => '777',
+      'id' => '7777777',
       'blogi' => 'koolo',
       'pvm' => 'i90dasi90asdi90',
-      'otsikko' => 'smlöööö',
-      'leipateksti' => 'joooooo',
+      'otsikko' => $params['otsikko'],
+      'leipateksti' => $params['leipateksti'],
       'published' => 'y'
     ));
 
     $postaus->save();
-
-    print_r($params);
+    Redirect::to('/');
+    //print_r($params); /* TODO joo tee tää joskus loppuun */ 
   }
 }
