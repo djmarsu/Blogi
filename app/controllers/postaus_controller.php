@@ -18,13 +18,19 @@ class PostausController extends BaseController {
   public static function store() {
     $params = $_POST;
 
+    $blii = 'n';
+
+    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'jees') {
+      $blii = 'y';
+    }
+
     $postaus = new Postaus(array(
       'id' => '7777777',
       'blogi' => 'koolo',
       'pvm' => 'i90dasi90asdi90',
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
-      'published' => 'y'
+      'published' => $blii
     ));
 
     $postaus->save();
