@@ -75,12 +75,13 @@ class PostausController extends BaseController {
 
     $postaus = new Postaus($attributes);
     $errors = $postaus->errors();
-    $postaus->update();
+//    Kint::dump($postaus);
+    $postaus->update($id);
 
     if (count($errors) > 0) {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
-      $postaus->update();
+      $postaus->update($id);
       Redirect::to('/postaus/' . $id, array('message' => 'muokattu'));
     }
   }
@@ -90,7 +91,7 @@ class PostausController extends BaseController {
     $kategoriaz = Kategoria::postauksen_kategoriat($id);
 
     foreach ($kategoriaz as $kategoria) {
-      Kategoria::destroy($kategoria->nimi);
+      Kategoria::poista_postaus($id);
     }
     $postaus->diztroy($postaus->id);
 //    $postaus = new Postaus(array('id' => $id));
