@@ -24,19 +24,30 @@ class PostausController extends BaseController {
       $blii = 'y';
     }
 
-    $postaus = new Postaus(array(
+    $attributes = array(
       'blogi' => 'koolo',
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
       'julkaistu' => $blii
-    ));
-  
-    $id = $postaus->save();
+    );
 
-    $kategoriat = $params['kategoriat'];
-    print_r($kategoriat);
-    KategoriaController::kategorizoi($kategoriat, $id);
+    $postaus = new Postaus($attributes);
 
-//    Redirect::to('/');
+    $errors = $postaus->errors();
+
+    Kint::dump($errors);
+    foreach($errors as $error) {
+      Kint::dump($error);
+    }
+    if (count($errors) == 0) {
+      $id = $postaus->save();
+
+      $kategoriat = $params['kategoriat'];
+      KategoriaController::kategorizoi($kategoriat, $id);
+
+      Redirect::to('/' . $postaus->id, array('message' => 'Postaus lisätty onnistuneesti!'));
+    } else{
+      View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
   }
 }
