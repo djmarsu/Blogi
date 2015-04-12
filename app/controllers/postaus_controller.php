@@ -57,10 +57,11 @@ class PostausController extends BaseController {
     View::make('postaus/edit.html', array('attributes' => $postaus));
   }
 
-  public static function update($id) {
+  public static function update() {
     $params = $_POST;
-
-    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'jees') {
+    
+    $blii = 'n';
+    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'checked') {
       $blii = 'y';
     }
 
@@ -80,5 +81,12 @@ class PostausController extends BaseController {
       $postaus->update();
       Redirect::to('/' . $postaus->id, array('message' => 'muokattu'));
     }
+  }
+
+  public static function destroy($id){
+    $postaus = new Postaus(array('id' => $id));
+    $postaus->destroy();
+
+    Redirect::to('/postaus', array('message' => 'postaus poistettu'));
   }
 }

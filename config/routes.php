@@ -1,17 +1,19 @@
 <?php
 
   $routes->get('/', function() {
-    //HelloWorldController::index();
-    //BlogiController::etusivu();
     PostausController::index();
   });
 
-  $routes->get('/postaus', function() {
-    BlogiController::postaus();
+  $routes->get('/postaus/:id/muokkaa', function($id) {
+	  PostausController::edit($id);
   });
 
-  $routes->get('/postaus/muokkaa', function() {
-	  BlogiController::postaus_muokkaus();
+  $routes->post('/postaus/muokkaa', function() {
+    PostausController::update();
+  });
+
+  $routes->get('/postaus/:id/poista', function($id) {
+    PostausController::destroy($id);
   });
 
   $routes->post('/postaus/uusi', function() {

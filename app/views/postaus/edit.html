@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Muokkaa postausta {{attributes.otsikko}}</h1>
+  <form method="post" action="{{base_path}}/postaus/muokkaa">
+	  <div class="form-group">
+	  <label>Otsikko</label>
+	  <input class="form-control" name="otsikko" value="{{attributes.otsikko}}" type="text">
+	  </div>
+
+	  <div class="form-group">
+    <label>Teksti</label>
+	  <textarea class="form-control" name="leipateksti">{{attributes.leipateksti}}</textarea>
+	  </div>
+
+	  <div class="checkbox">
+		  <label>
+			  <input type="checkbox" name="julkaistu" {% if attributes.julkaistu == 'y' %} checked="checked" {% endif %} >
+			  Julkaistu
+		  </label>
+	  </div>
+
+	  <div class="form-group">
+		  <button type="submit" class="btn btn-primary">Tallenna</button>
+	  </div>
+  </form>
+
+</div>
+{% endblock %}
