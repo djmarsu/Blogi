@@ -26,10 +26,10 @@
       $kayttaja = Kayttaja::authenticate($params['nimi'], $params['salasana']);
 
       if (!$kayttaja) {
-          self::redirect_to('/login', array('error' => 'Väärä käyttäjätunnus tai salasana.'));
+          Redirect::to('/login', array('error' => 'Väärä käyttäjätunnus tai salasana.'));
       } else {
           $_SESSION['nimi'] = $kayttaja->nimi;
-          self::redirect_to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '.'));
+          Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '.'));
       }
     }
   }

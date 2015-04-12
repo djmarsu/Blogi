@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <a href="{{base_path}}/postaus/uusi">Lisää uusi</a>
 
 {% for postaus in postaukset %}

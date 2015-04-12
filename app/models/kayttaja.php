@@ -26,5 +26,6 @@ class Kayttaja extends BaseModel {
   
     return null;
   }
+}
 
 
