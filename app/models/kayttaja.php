@@ -8,10 +8,9 @@ class Kayttaja extends BaseModel {
     if ($salasana == $kayttaja->salasana) {
       return $kayttaja;
     }
-      return null;
-    }
+    return null;
   }
-
+  
   public static function find($nimi) {
     $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi LIMIT 1');
     $query->execute(array('nimi' => $nimi));
@@ -24,7 +23,8 @@ class Kayttaja extends BaseModel {
       ));
       return $kayttaja;
     }
-
+  
     return null;
+  }
 
 
