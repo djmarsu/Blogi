@@ -8,8 +8,8 @@
 	  PostausController::edit($id);
   });
 
-  $routes->post('/postaus/muokkaa', function() {
-    PostausController::update();
+  $routes->post('/postaus/:id/muokkaa', function($id) {
+    PostausController::update($id);
   });
 
   $routes->get('/postaus/:id/poista', function($id) {

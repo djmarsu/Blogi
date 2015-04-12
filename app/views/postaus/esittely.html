@@ -14,5 +14,12 @@
       <a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a> 
     {% endfor %}
   </div>
+
+<form method="post" action="{{base_path}}/postaus/{{postaus.id}}/poista">
+    <button type="submit" style="float:left; margin-right: 1em" class="btn btn-danger">Poista</button>
+</form>
+
+<a href="{{base_path}}/postaus/{{postaus.id}}/muokkaa" class="btn btn-default">Muokkaa</a>
+
   {% endif %}
 {% endblock %}

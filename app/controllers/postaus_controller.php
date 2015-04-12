@@ -46,7 +46,7 @@ class PostausController extends BaseController {
       $kategoriat = $params['kategoriat'];
       KategoriaController::kategorizoi($kategoriat, $id);
 
-      Redirect::to('/' . $postaus->id, array('message' => 'Postaus lisätty onnistuneesti!'));
+      Redirect::to('/postaus/' . $postaus->id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
       View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
     }
@@ -57,7 +57,7 @@ class PostausController extends BaseController {
     View::make('postaus/edit.html', array('attributes' => $postaus));
   }
 
-  public static function update() {
+  public static function update($id) {
     $params = $_POST;
     
     $blii = 'n';
@@ -67,19 +67,21 @@ class PostausController extends BaseController {
 
     $attributes = array(
       'blogi' => 'koolo',
+      'id' => $id,
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
-     'julkaistu' => $blii
+      'julkaistu' => $blii
     );
 
     $postaus = new Postaus($attributes);
     $errors = $postaus->errors();
+    $postaus->update();
 
     if (count($errors) > 0) {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
       $postaus->update();
-      Redirect::to('/' . $postaus->id, array('message' => 'muokattu'));
+      Redirect::to('/postaus/' . $postaus->id, array('message' => 'muokattu'));
     }
   }
 

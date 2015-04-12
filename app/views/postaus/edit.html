@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Muokkaa postausta {{attributes.otsikko}}</h1>
-  <form method="post" action="{{base_path}}/postaus/muokkaa">
+  <form method="post" action="{{base_path}}/postaus/{{attributes.id}}/muokkaa">
 	  <div class="form-group">
 	  <label>Otsikko</label>
 	  <input class="form-control" name="otsikko" value="{{attributes.otsikko}}" type="text">
