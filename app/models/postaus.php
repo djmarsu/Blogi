@@ -55,10 +55,23 @@ class Postaus extends BaseModel {
     return null;
   }
 
-  public function save() {
+  public function save() { /* miks tää ei oo static ???? */
     $query = DB::connection()->prepare("INSERT INTO Postaus (blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('koolo', current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
     $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
     $row = $query->fetch();
     return $row['id'];
+  }
+
+  public static function kategorioittain($nimi) {
+    $query = DB::connection()->prepare('SELECT * FROM PostauksenKategoria WHERE kategoriannimi = :nimi');
+    $query->execute(array('nimi' => $nimi));
+    $rows = $query->fetchAll();
+    $postaukset = array();
+
+    foreach ($rows as $row) {
+      $postaukset[] = Postaus::find($row['postausid']);
+    }
+
+    return $postaukset;
   }
 }

@@ -8,7 +8,8 @@ class KategoriaController extends BaseController {
 
   public static function show($nimi) {
     $kategoria = Kategoria::find($nimi);
-    View::make('kategoria/esittely.html', array('kategoria' => $kategoria));
+    $postaukset = Postaus::kategorioittain($nimi);
+    View::make('kategoria/esittely.html', array('kategoria' => $kategoria, 'postaukset' => $postaukset));
   }
 
   public static function luokategoria($nimi) {

@@ -2,8 +2,13 @@
 
 {% block content %}
 
-    <h1>{{kategoria.nimi}}</a>
+    <h1>{{kategoria.nimi}}</h1>
 
     <p>{{kategoria.kuvaus}}</p>
 
+    <ul style="list-style:none;padding:0;">
+    {% for postaus in postaukset %}
+      <li><a href="{{base_path}}/postaus/{{postaus.id}}">{{postaus.otsikko}}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}

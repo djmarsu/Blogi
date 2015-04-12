@@ -8,7 +8,8 @@ class PostausController extends BaseController {
 
   public static function show($id) {
     $postaus = Postaus::find($id);
-    View::make('postaus/esittely.html', array('postaus' => $postaus));
+    $kategoriat = Kategoria::postauksen_kategoriat($id);
+    View::make('postaus/esittely.html', array('postaus' => $postaus, 'kategoriat' => $kategoriat));
   }
 
   public static function create() {
@@ -48,6 +49,36 @@ class PostausController extends BaseController {
       Redirect::to('/' . $postaus->id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
       View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
+  }
+
+  public static function edit($id) {
+    $postaus = Postaus::find($id);
+    View::make('postaus/edit.html', array('attributes' => $postaus));
+  }
+
+  public static function update($id) {
+    $params = $_POST;
+
+    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'jees') {
+      $blii = 'y';
+    }
+
+    $attributes = array(
+      'blogi' => 'koolo',
+      'otsikko' => $params['otsikko'],
+      'leipateksti' => $params['leipateksti'],
+     'julkaistu' => $blii
+    );
+
+    $postaus = new Postaus($attributes);
+    $errors = $postaus->errors();
+
+    if (count($errors) > 0) {
+      View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    } else {
+      $postaus->update();
+      Redirect::to('/' . $postaus->id, array('message' => 'muokattu'));
     }
   }
 }

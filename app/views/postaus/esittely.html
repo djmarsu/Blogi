@@ -9,6 +9,10 @@
     <p>{{postaus.leipateksti}}</p>
 
     <p style="color: grey;">{{postaus.pvm}}</p>
+
+    {% for kategoria in kategoriat %}
+      <a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a> 
+    {% endfor %}
   </div>
   {% endif %}
 {% endblock %}

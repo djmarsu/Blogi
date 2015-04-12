@@ -75,6 +75,20 @@ class Kategoria extends BaseModel {
     return null;
   }
 
+
+  public static function postauksen_kategoriat($postausid) {
+    $kategoriat = array();
+    $query = DB::connection()->prepare('SELECT * FROM PostauksenKategoria WHERE postausID = :postausid');
+    $query->execute(array('postausid' => $postausid));
+    $rows = $query->fetchAll();
+
+    foreach($rows as $row){
+      $kategoriat[] = Kategoria::find($row['kategoriannimi']);
+    }
+
+    return $kategoriat;
+  }
+
   public function luo() {
     $query = DB::connection()->prepare("INSERT INTO Kategoria (nimi) VALUES (:nimi) RETURNING nimi");
     $query->execute(array('nimi' => $this->nimi));
