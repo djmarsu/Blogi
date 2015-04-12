@@ -32,4 +32,9 @@
           Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '.'));
       }
     }
+
+    public static function logout() {
+        $_SESSION['nimi'] = null;
+        Redirect::to('/', array('message' => 'Olet nyt kirjautunut ulos.'));
+    }
   }

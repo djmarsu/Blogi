@@ -54,6 +54,10 @@
     KayttajaController::signup();
   });
 
+  $routes->post('/logout', function() {
+    KayttajaController::logout();
+  });
+
   $routes->get('/kokeilu', function() {
 		BlogiController::showkokeilu();
 	});
