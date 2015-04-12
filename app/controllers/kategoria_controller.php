@@ -7,7 +7,7 @@ class KategoriaController extends BaseController {
   }
 
   public static function show($nimi) {
-    $postaus = Kategoria::find($nimi);
+    $kategoria = Kategoria::find($nimi);
     View::make('kategoria/esittely.html', array('kategoria' => $kategoria));
   }
 

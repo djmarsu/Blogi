@@ -59,7 +59,7 @@ class Kategoria extends BaseModel {
     return $games;
   }
 
-  public static function find($id) {
+  public static function find($nimi) {
     $query = DB::connection()->prepare('SELECT * FROM Kategoria WHERE nimi = :nimi LIMIT 1');
     $query->execute(array('nimi' => $nimi));
     $row = $query->fetch();
