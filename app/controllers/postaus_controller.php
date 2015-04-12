@@ -25,16 +25,18 @@ class PostausController extends BaseController {
     }
 
     $postaus = new Postaus(array(
-      'id' => '7777777',
       'blogi' => 'koolo',
-      'pvm' => 'i90dasi90asdi90',
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
-      'published' => $blii
+      'julkaistu' => $blii
     ));
+  
+    $id = $postaus->save();
 
-    $postaus->save();
-    Redirect::to('/');
-    //print_r($params); /* TODO joo tee tää joskus loppuun */ 
+    $kategoriat = $params['kategoriat'];
+    print_r($kategoriat);
+    KategoriaController::kategorizoi($kategoriat, $id);
+
+//    Redirect::to('/');
   }
 }
