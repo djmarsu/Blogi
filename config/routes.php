@@ -70,4 +70,12 @@
     PostausController::show($id);
   });
 
+  $routes->get('/kategoriat', function() {
+    KategoriaController::listaa();
+  });
+
+  $routes->get('/kategoria/:nimi', function($nimi) {
+    KategoriaController::show($nimi);
+  });
+
  

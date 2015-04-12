@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+mo
+{% for kategoria in kategoriat %}
+    <h4><a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a></h4>
+    <p>{{kategoria.kuvaus}}</p>
+{% endfor %}
+{% endblock %}
