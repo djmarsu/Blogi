@@ -12,7 +12,7 @@
     PostausController::update($id);
   });
 
-  $routes->get('/postaus/:id/poista', function($id) {
+  $routes->post('/postaus/:id/poista', function($id) {
     PostausController::destroy($id);
   });
 

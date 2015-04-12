@@ -46,7 +46,7 @@ class PostausController extends BaseController {
       $kategoriat = $params['kategoriat'];
       KategoriaController::kategorizoi($kategoriat, $id);
 
-      Redirect::to('/postaus/' . $postaus->id, array('message' => 'Postaus lisätty onnistuneesti!'));
+      Redirect::to('/postaus/' . $id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
       View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
     }
@@ -81,14 +81,20 @@ class PostausController extends BaseController {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
       $postaus->update();
-      Redirect::to('/postaus/' . $postaus->id, array('message' => 'muokattu'));
+      Redirect::to('/postaus/' . $id, array('message' => 'muokattu'));
     }
   }
 
   public static function destroy($id){
-    $postaus = new Postaus(array('id' => $id));
-    $postaus->destroy();
+    $postaus = Postaus::find($id);
+    $kategoriaz = Kategoria::postauksen_kategoriat($id);
 
-    Redirect::to('/postaus', array('message' => 'postaus poistettu'));
+    foreach ($kategoriaz as $kategoria) {
+      Kategoria::destroy($kategoria->nimi);
+    }
+    $postaus->diztroy($postaus->id);
+//    $postaus = new Postaus(array('id' => $id));
+//    $postaus->destroy();
+    Redirect::to('/', array('message' => 'postaus poistettu'));
   }
 }

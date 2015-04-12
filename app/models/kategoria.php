@@ -75,6 +75,12 @@ class Kategoria extends BaseModel {
     return null;
   }
 
+  public static function destroy($juu) {
+    $query = DB::connection()->prepare('DELETE FROM PostauksenKategoria WHERE kategoriannimi = :nimi');
+    $query->execute(array('nimi' => $juu));
+    $query2 = DB::connection()->prepare('DELETE FROM Kategoria WHERE nimi = :nimi');
+    $query2->execute(array('nimi' => $juu));
+  }
 
   public static function postauksen_kategoriat($postausid) {
     $kategoriat = array();
