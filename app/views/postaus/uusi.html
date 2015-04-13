@@ -17,12 +17,12 @@
   <form method="post" action="{{base_path}}/postaus/uusi">
 	  <div class="form-group">
 	  <label>Otsikko</label>
-	  <input class="form-control" name="otsikko" type="text">
+	  <input class="form-control" name="otsikko" type="text" {% if attributes.otsikko %} value="{{attributes.otsikko}}" {% endif %}>
 	  </div>
 
 	  <div class="form-group">
     <label>Teksti</label>
-	  <textarea class="form-control" name="leipateksti"></textarea>
+	  <textarea class="form-control" name="leipateksti">{% if attributes.leipateksti %}{{attributes.leipateksti}}{% endif %}</textarea>
 	  </div>
 
     <div class="form-group">

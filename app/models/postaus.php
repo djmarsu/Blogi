@@ -4,22 +4,20 @@ class Postaus extends BaseModel {
 
   public function __construct($attributes) {
     parent::__construct($attributes);
-    $this->validators = array('validate_otsikko');
+    $this->validators = array('validate_otsikko', 'validate_leipateksti');
   }
 
   public function validate_leipateksti() {
     $errors = array();
-//    if ($this->leipateksti == '' || $this->leipateksti == null || strlen($this->leipateksti) < 3) {
+    if ($this->leipateksti == '' || $this->leipateksti == null) {
         $errors[] = "Tyhjä postaus ei ole järkevä..";
- //   }
+    }
     return $errors;
   }
 
   public function validate_otsikko() {
     $errors = array();
-    Kint::dump($this->otsikko);
-    Kint::dump("huoooh");
-    if ($this->otsikko == '' || $this->otsikko == null || strlen($this->otsikko == 0)) {
+    if ($this->otsikko == '' || $this->otsikko == null) {
       $errors[] = "ei saa olla tyhjä otsikko";
     }
     return $errors;
