@@ -64,10 +64,10 @@ class Postaus extends BaseModel {
 
   public function update($id) {
 //    $query = DB::connection()->prepare('UPDATE Postaus SET otsikko = :otsikko, leipateksti = :leipateksti, julkaistu = :julkaistu WHERE id = :id');
-    $query = DB::connection()->prepare('UPDATE Postaus SET otsikko = :otsikko, leipateksti = :leipateksti WHERE id = :id');
+    $query = DB::connection()->prepare('UPDATE Postaus SET otsikko = :otsikko, leipateksti = :leipateksti, julkaistu = :julkaistu WHERE id = :id');
 //    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu, 'id' => $this->id));
 //    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'id' => $id));
-    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'id' => $id));
+    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu, 'id' => $id));
 
 
 

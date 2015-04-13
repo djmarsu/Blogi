@@ -61,7 +61,7 @@ class PostausController extends BaseController {
     $params = $_POST;
     
     $blii = 'n';
-    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'checked') {
+    if (isset($_POST['julkaistu'])) {
       $blii = 'y';
     }
 
