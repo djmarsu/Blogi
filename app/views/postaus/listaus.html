@@ -12,14 +12,16 @@
 <a href="{{base_path}}/postaus/uusi">Lisää uusi</a>
 
 {% for postaus in postaukset %}
-  {% if postaus.julkaistu == 'y' %}
-  <div class="pos">
+  {% if postaus.julkaistu == 'n' %}
+    <div class="pos" style="color:grey;">
+  {% else %}
+    <div class="pos">
+  {% endif %}
     <h1><a href="{{base_path}}/postaus/{{postaus.id}}">{{postaus.otsikko}}</a></h1>
 
     <p>{{postaus.leipateksti}}</p>
 
     <p style="color: grey;">{{postaus.pvm}}</p>
   </div>
-  {% endif %}
 {% endfor %}
 {% endblock %}

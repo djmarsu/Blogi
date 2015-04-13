@@ -35,12 +35,13 @@ class PostausController extends BaseController {
     $postaus = new Postaus($attributes);
 
     $errors = $postaus->errors();
-
+    Kint::dump("ok kokeillaas");
+    Kint::dump($attributes['otsikko']);
     Kint::dump($errors);
     foreach($errors as $error) {
       Kint::dump($error);
     }
-    if (count($errors) == 0) {
+/*    if (count($errors) == 0) {
       $id = $postaus->save();
 
       $kategoriat = $params['kategoriat'];
@@ -49,7 +50,7 @@ class PostausController extends BaseController {
       Redirect::to('/postaus/' . $id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
       View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
-    }
+    }*/
   }
 
   public static function edit($id) {
