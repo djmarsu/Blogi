@@ -40,7 +40,8 @@ class Kategoria extends BaseModel {
     return $kategoriat;
 */
     $games = array();
-    $query = DB::connection()->prepare('SELECT * FROM Kategoria');
+//    $query = DB::connection()->prepare('SELECT * FROM Kategoria');
+    $query = DB::connection()->prepare('SELECT DISTINCT kategoriannimi FROM PostauksenKategoria');
     // Suoritetaan kysely
     $query->execute();
     // Haetaan kyselyn tuottamat rivit
@@ -51,8 +52,7 @@ class Kategoria extends BaseModel {
     foreach($rows as $row){
       // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
       $games[] = new Kategoria(array(
-        'nimi' => $row['nimi'],
-        'kuvaus' => $row['kuvaus']
+        'nimi' => $row['kategoriannimi']
       ));
     }
 

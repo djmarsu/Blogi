@@ -7,9 +7,8 @@
     {{message}}
 </div>
 {% endif %}
-mo
+<h2>Kategoriat</h2>
 {% for kategoria in kategoriat %}
     <h4><a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a></h4>
-    <p>{{kategoria.kuvaus}}</p>
 {% endfor %}
 {% endblock %}
