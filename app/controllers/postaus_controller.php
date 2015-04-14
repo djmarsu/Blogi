@@ -1,11 +1,12 @@
 <?php
 
 class PostausController extends BaseController {
-  public static function index() {
+/*
+    public static function index() {
     $postaukset = Postaus::all();
     View::make('postaus/listaus.html', array('postaukset' => $postaukset));
   }
-
+*/
   public static function show($id) {
     $postaus = Postaus::find($id);
     $kategoriat = Kategoria::postauksen_kategoriat($id);

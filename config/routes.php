@@ -1,7 +1,8 @@
 <?php
 
   $routes->get('/', function() {
-    PostausController::index();
+//    PostausController::index();
+    BlogiController::index();
   });
 
   $routes->get('/postaus/:id/muokkaa', function($id) {
