@@ -49,12 +49,24 @@ class PostausController extends BaseController {
 
   public static function edit($id) {
     $postaus = Postaus::find($id);
-    View::make('postaus/edit.html', array('attributes' => $postaus));
+    // TODO korjaa tää joskus aiva kauheen näkönen...
+    // mutta ei jaksa käyttää javascriptiä????
+    $kategoriatruma = Kategoria::postauksen_kategoriat($id);
+    $kategoriat = "";
+    foreach ($kategoriatruma as $kategoria) {
+      $kategoriat .= $kategoria->nimi;
+      $kategoriat .= ",";
+    }
+    if (!empty($kategoriat)) {
+      $kategoriat = substr($kategoriat, 0, -1);
+    }
+    View::make('postaus/edit.html', array('attributes' => $postaus, 'kategoriat' => $kategoriat));
   }
 
   public static function update($id) {
     $params = $_POST;
     
+    // TODO on tääki vaikeesti tehty hohhoijaa
     $blii = 'n';
     if (isset($_POST['julkaistu'])) {
       $blii = 'y';
@@ -71,12 +83,22 @@ class PostausController extends BaseController {
     $postaus = new Postaus($attributes);
     $errors = $postaus->errors();
 //    Kint::dump($postaus);
-    $postaus->update($id);
+//    $postaus->update($id);
 
     if (count($errors) > 0) {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
       $postaus->update($id);
+      // TODO mihin kohtaan tän laittas,,tähän vai modeliin,onko toi poista_postaus ees model vai controller apuaaa
+      Kategoria::poista_postaus($id);
+      Kint::dump("testataass,,");
+      $kategoriat = $params['kategoriat'];
+      Kint::dump($kategoriat);
+      $kategoriat = trim($kategoriat); // huooooohhh tyhjät kategoriat = ei hyvä
+      if (!empty($kategoriat)) {
+        KategoriaController::kategorizoi($kategoriat, $id);
+      }
+      
       Redirect::to('/postaus/' . $id, array('message' => 'muokattu'));
     }
   }
