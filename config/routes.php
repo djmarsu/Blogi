@@ -1,11 +1,15 @@
 <?php
 
+  function check_logged_in(){
+    BaseController::check_logged_in();
+  }
+
   $routes->get('/', function() {
 //    PostausController::index();
     BlogiController::index();
   });
 
-  $routes->get('/postaus/:id/muokkaa', function($id) {
+  $routes->get('/postaus/:id/muokkaa', 'check_logged_in', function($id) {
 	  PostausController::edit($id);
   });
 
@@ -13,7 +17,7 @@
     PostausController::update($id);
   });
 
-  $routes->post('/postaus/:id/poista', function($id) {
+  $routes->post('/postaus/:id/poista', 'check_logged_in', function($id) {
     PostausController::destroy($id);
   });
 
@@ -21,16 +25,12 @@
     PostausController::store();
   });
 
-  $routes->get('/postaus/uusi', function() {
+  $routes->get('/postaus/uusi', 'check_logged_in', function() {
     PostausController::create();
   });
 
   $routes->get('/listaus', function() {
 	  BlogiController::listaus();
-  });
-
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
   });
 
   $routes->get('/login', function() {
