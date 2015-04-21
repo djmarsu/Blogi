@@ -39,24 +39,28 @@ class Kategoria extends BaseModel {
 
     return $kategoriat;
 */
-    $games = array();
 //    $query = DB::connection()->prepare('SELECT * FROM Kategoria');
-    $query = DB::connection()->prepare('SELECT DISTINCT kategoriannimi FROM PostauksenKategoria');
+//    $query = DB::connection()->prepare('SELECT DISTINCT kategoriannimi FROM PostauksenKategoria');
+
+    // ei näytä piilotettuja postauksia
+    // TODO tee silleen että näyttää adminille..........?
+    $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id AND Postaus.julkaistu = 'y'");
+ 
     // Suoritetaan kysely
     $query->execute();
     // Haetaan kyselyn tuottamat rivit
     $rows = $query->fetchAll();
-    $games = array();
+    $kategoriat = array();
 
     // Käydään kyselyn tuottamat rivit läpi
     foreach($rows as $row){
       // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
-      $games[] = new Kategoria(array(
+      $kategoriat[] = new Kategoria(array(
         'nimi' => $row['kategoriannimi']
       ));
     }
 
-    return $games;
+    return $kategoriat;
   }
 
   public static function find($nimi) {
