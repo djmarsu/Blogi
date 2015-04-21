@@ -4,9 +4,26 @@
   margin: 0px auto;
 }
 
+body {
+  background: url("/huoh.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#main-container {
+  background-color: #ffffff;
+  padding-bottom: 50px;
+}
+
 .navbar .container-fluid{
   max-width: 1200px;
   margin: 0px auto;
+}
+
+.navbar {
+background-color: #fcfcfc;
 }
 
 /*.pos {
