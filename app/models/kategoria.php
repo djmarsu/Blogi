@@ -128,8 +128,6 @@ class Kategoria extends BaseModel {
     $query->execute(array('postausid' => $postausid, 'kategoriannimi' => $this->nimi));
   }
 
-
-
   public function update($nimi) {
     $query = DB::connection()->prepare('UPDATE Kategoria SET kuvaus = :kuvaus WHERE nimi = :nimi');
     $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus));

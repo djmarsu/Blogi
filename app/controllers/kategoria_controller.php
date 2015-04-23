@@ -50,6 +50,20 @@ class KategoriaController extends BaseController {
       View::make('kategoria/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
       $kategoria->update($nimi);
+
+      if (strcmp($nimi, $kategoria->nimi) != 0) {
+        // hae alkuperäne kategoria
+        $kategoria_alku = Kategoria::find($nimi);
+        $postaukset = Postaus::kategorioittain($nimi);
+
+        foreach ($postaukset as $postaus) {
+          Kategoria::poista_postaus($postaus->id);
+          $kategoria->luo();
+          $kategoria->liita_postaukseen($postaus->id);
+        }
+        Redirect::to('/kategoria/' . $kategoria->nimi, array('message' => 'muokattu'));     
+      }
+
       Redirect::to('/kategoria/' . $nimi, array('message' => 'muokattu'));
     }
   }

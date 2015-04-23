@@ -92,9 +92,7 @@ class PostausController extends BaseController {
       $postaus->update($id);
       // TODO mihin kohtaan tän laittas,,tähän vai modeliin,onko toi poista_postaus ees model vai controller apuaaa
       Kategoria::poista_postaus($id);
-      Kint::dump("testataass,,");
       $kategoriat = $params['kategoriat'];
-      Kint::dump($kategoriat);
       $kategoriat = trim($kategoriat); // huooooohhh tyhjät kategoriat = ei hyvä
       if (!empty($kategoriat)) {
         KategoriaController::kategorizoi($kategoriat, $id);
