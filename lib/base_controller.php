@@ -12,7 +12,7 @@
 
     public static function check_logged_in() {
         if (!isset($_SESSION['nimi'])) {
-            self::redirect_to('/login', array('message' => 'Kirjaudu sisään'));
+            Redirect::to('/login', array('message' => 'Kirjaudu sisään'));
         }
     }
   }
