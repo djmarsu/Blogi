@@ -60,6 +60,7 @@ class KategoriaController extends BaseController {
           Kategoria::poista_postaus($postaus->id);
           $kategoria->luo();
           $kategoria->liita_postaukseen($postaus->id);
+          $kategoria->update($nimi);
         }
         Redirect::to('/kategoria/' . $kategoria->nimi, array('message' => 'muokattu'));     
       }
