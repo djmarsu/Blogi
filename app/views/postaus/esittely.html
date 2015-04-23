@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  {% if postaus.julkaistu == 'y' %}
+  {% if postaus.julkaistu == 'y' or user_logged_in %}
   <div class="pos">
     <h1><a href="#">{{postaus.otsikko}}</a></h1>
 
