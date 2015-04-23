@@ -21,7 +21,7 @@
 
     <p>{{postaus.leipateksti}}</p>
 
-    <p style="color: grey;">{{postaus.pvm}}</p>
+    <p style="color: grey;">{{postaus.pvm|date("d.m.Y")}}</p>
   </div>
 {% endfor %}
 {% endblock %}

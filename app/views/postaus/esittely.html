@@ -8,7 +8,7 @@
 
     <p>{{postaus.leipateksti}}</p>
 
-    <p style="color: grey;">{{postaus.pvm}}</p>
+    <p style="color: grey;">{{postaus.pvm|date("d.m.Y")}}</p>
 
     {% for kategoria in kategoriat %}
       <a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a> 
