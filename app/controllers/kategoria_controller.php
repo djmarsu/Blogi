@@ -29,5 +29,29 @@ class KategoriaController extends BaseController {
     }
 
   }
+
+  public static function edit($nimi) {
+    $kategoria = Kategoria::find($nimi);
+    View::make('kategoria/edit.html', array('attributes' => $kategoria));
+  }
+
+  public static function update($nimi) {
+    $params = $_POST;
+    
+    $attributes = array(
+      'nimi' => $params['nimi'],
+      'kuvaus' => $params['kuvaus'],
+    );
+    
+    $kategoria = new Kategoria($attributes);
+    $errors = $kategoria->errors();
+
+    if (count($errors) > 0) {
+      View::make('kategoria/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    } else {
+      $kategoria->update($nimi);
+      Redirect::to('/kategoria/' . $nimi, array('message' => 'muokattu'));
+    }
+  }
 }
 

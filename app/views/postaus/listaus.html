@@ -9,19 +9,34 @@
 </div>
 {% endif %}
 
+
+{% if errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for error in errors %}
+        <li>{{error}}</li>
+      {% endfor %}
+     </ul>
+  </div>
+{% endif %}
+
+{% if user_logged_in %}
 <a href="{{base_path}}/postaus/uusi">Lisää uusi</a>
+{% endif %}
 
 {% for postaus in postaukset %}
-  {% if postaus.julkaistu == 'n' %}
+  {% if postaus.julkaistu == 'y' or user_logged_in %}
+    {% if postaus.julkaistu == 'n' %}
     <div class="pos" style="color:grey;">
-  {% else %}
+    {% else %}
     <div class="pos">
-  {% endif %}
-    <h1><a href="{{base_path}}/postaus/{{postaus.id}}">{{postaus.otsikko}}</a></h1>
+    {% endif %}
+    <h1><a href="{{base_path}}/postaus/{{postaus.id}}" {% if postaus.julkaistu == 'n' %}style="color:grey;"{% endif %}>{{postaus.otsikko}}</a></h1>
 
     <p>{{postaus.leipateksti}}</p>
 
     <p style="color: grey;">{{postaus.pvm|date("d.m.Y")}}</p>
   </div>
+  {% endif %}
 {% endfor %}
 {% endblock %}

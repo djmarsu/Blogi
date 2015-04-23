@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if message %}
-<div class="alert alert-success">
-  {{message}}
-</div>
-{% endif %}
 
 {% if errors %}
   <div class="alert alert-danger">
@@ -15,6 +10,12 @@
       {% endfor %}
      </ul>
   </div>
+{% endif %}
+
+{% if message %}
+<div class="alert alert-success">
+  {{message}}
+</div>
 {% endif %}
 
   <h1>Kirjaudu sisään</h1>

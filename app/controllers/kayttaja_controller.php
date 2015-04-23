@@ -15,24 +15,23 @@
 
       $kayttaja = new Kayttaja($attributes);
       $errors = $kayttaja->errors();  
-//      Kint::dump($errors);
-//      Kint::dump("eipä siinä,,");
  
       if (!Kayttaja::onko_kayttajaa()) {
         if (count($errors) == 0) {
-          $nimi = Kayttaja::create($attributes);
-          $_SESSION['nimi'] = $attributes['nimi'];
-          Redirect::to('/login', array('message' => "olet nyt rekisteröitynyt!"));
+          if (Kayttaja::find($kayttaja->nimi)) {
+            Redirect::to('/', array('errors' => array("saman niminen ($kayttaja->nimi) käyttäjä on jo luotu mitä tehdä?")));
+          } else {
+            $nimi = Kayttaja::create($attributes);
+            $_SESSION['nimi'] = $attributes['nimi'];
+            Redirect::to('/', array('message' => "olet nyt rekisteröitynyt (kirjaudutin sisään)!"));
+          }
         } else {
-        View::make('kayttaja/signup.html', array('errors' => $errors));
+          View::make('kayttaja/signup.html', array('errors' => $errors));
         }
       } else {
 //         Redirect::to('/login', array('errors' => array("käyttäjä on jo tehty, ota yhteys sql tukihenkilöön/vastaavaan")));
         View::make('kayttaja/login.html', array('errors' => array("käyttäjä on jo tehty, ota yhteys sql tukihenkilöön/vastaavaan")));
       }
-      
-      //Redirect::to('/', array('message' => 'onnistuiii'));
-      //self::Redirect::to('/login');
     }
 
     public static function login() {
@@ -42,9 +41,8 @@
     public static function handle_login() {
       $params = $_POST;
       $kayttaja = Kayttaja::authenticate($params['nimi'], $params['salasana']);
-
-      if (!$kayttaja) {
-          Redirect::to('/login', array('errors' => 'Väärä käyttäjätunnus tai salasana.'));
+      if(!$kayttaja) {
+          View::make('/kayttaja/login.html', array('errors' => array('Väärä käyttäjätunnus tai salasana.')));
       } else {
           $_SESSION['nimi'] = $kayttaja->nimi;
           Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '.'));

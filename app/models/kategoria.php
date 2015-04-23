@@ -4,7 +4,17 @@ class Kategoria extends BaseModel {
 
   public function __construct($attributes) {
     parent::__construct($attributes);
+    $this->validators = array('validate_nimi');
   }
+
+  public function validate_nimi() {
+    $errors = array();
+    if ($this->nimi == '' || $this->nimi == null) {
+        $errors[] = "kategorian nimi ei saa olla tyhjä";
+    }
+    return $errors;
+  }
+
 
   public static function all() {
 /*    $query = DB::connection()->prepare('SELECT * FROM PostauksenKategoria ORDER kategoriannimi ASC');
@@ -42,10 +52,12 @@ class Kategoria extends BaseModel {
 //    $query = DB::connection()->prepare('SELECT * FROM Kategoria');
 //    $query = DB::connection()->prepare('SELECT DISTINCT kategoriannimi FROM PostauksenKategoria');
 
-    // ei näytä piilotettuja postauksia
-    // TODO tee silleen että näyttää adminille..........?
-    $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id AND Postaus.julkaistu = 'y'");
- 
+    // mitenköhän tän tekis järkevämmin
+    if (!BaseController::get_user_logged_in()) {
+      $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id AND Postaus.julkaistu = 'y' ORDER BY PostauksenKategoria.kategoriannimi ASC");
+     } else {
+    $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id ORDER BY PostauksenKategoria.kategoriannimi ASC");
+    }
     // Suoritetaan kysely
     $query->execute();
     // Haetaan kyselyn tuottamat rivit
@@ -114,6 +126,13 @@ class Kategoria extends BaseModel {
   public function liita_postaukseen($postausid) {
     $query = DB::connection()->prepare("INSERT INTO PostauksenKategoria (postausID, kategoriannimi) VALUES (:postausid, :kategoriannimi)");
     $query->execute(array('postausid' => $postausid, 'kategoriannimi' => $this->nimi));
+  }
+
+
+
+  public function update($nimi) {
+    $query = DB::connection()->prepare('UPDATE Kategoria SET kuvaus = :kuvaus WHERE nimi = :nimi');
+    $query->execute(array('nimi' => $this->nimi, 'kuvaus' => $this->kuvaus));
   }
 }
 

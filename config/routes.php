@@ -9,6 +9,14 @@
     BlogiController::index();
   });
 
+  $routes->get('/kategoria/:nimi/muokkaa', 'check_logged_in', function($nimi) {
+    KategoriaController::edit($nimi);
+  });
+
+  $routes->post('/kategoria/:nimi/muokkaa', function($nimi) {
+    KategoriaController::update($nimi);
+  });
+
   $routes->get('/postaus/:id/muokkaa', 'check_logged_in', function($id) {
 	  PostausController::edit($id);
   });

@@ -4,11 +4,15 @@
 
     <h1>{{kategoria.nimi}}</h1>
 
-    <p>{{kategoria.kuvaus}}</p>
+    {% if kategoria.kuvaus %} <p>{{kategoria.kuvaus}}</p>{% endif %}
+    <a href="{{base_path}}/kategoria/{{kategoria.nimi}}/muokkaa" class="btn btn-default">Muokkaa</a>
 
-    <ul style="list-style:none;padding:0;">
+    <ul style="list-style:none;padding:0;margin-top: 1em;">
     {% for postaus in postaukset %}
+      {% if postaus.julkaistu == 'y' or user_logged_in %}
       <li><a href="{{base_path}}/postaus/{{postaus.id}}">{{postaus.otsikko}}</a></li>
+      {% endif %}
     {% endfor %}
     </ul>
+
 {% endblock %}
