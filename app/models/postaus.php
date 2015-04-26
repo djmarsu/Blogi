@@ -64,6 +64,8 @@ class Postaus extends BaseModel {
   }
 
   public function save() {
+    // HOX KÄYTÄ TÄTÄ $kayttaja = BaseController::get_user_logged_in();
+    //                $kayttaja->nimi
     $query = DB::connection()->prepare("INSERT INTO Postaus (blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('koolo', current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
     $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
     $row = $query->fetch();
