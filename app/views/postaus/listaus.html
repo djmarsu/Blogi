@@ -27,15 +27,15 @@
 {% for postaus in postaukset %}
   {% if postaus.julkaistu == 'y' or user_logged_in %}
     {% if postaus.julkaistu == 'n' %}
-    <div class="pos" style="color:grey;">
+    <div class="pos" style="color:#333333;">
     {% else %}
     <div class="pos">
     {% endif %}
-    <h1><a href="{{base_path}}/postaus/{{postaus.id}}" {% if postaus.julkaistu == 'n' %}style="color:grey;"{% endif %}>{{postaus.otsikko}}</a></h1>
+    <h1><a href="{{base_path}}/postaus/{{postaus.id}}" {% if postaus.julkaistu == 'n' %}style="color:#333333;"{% endif %}>{{postaus.otsikko}}</a></h1>
 
     <p>{{postaus.leipateksti}}</p>
 
-    <p style="color: grey;">{{postaus.pvm|date("d.m.Y")}}</p>
+    <p style="color: #333333;">{{postaus.pvm|date("d.m.Y")}}</p>
   </div>
   {% endif %}
 {% endfor %}

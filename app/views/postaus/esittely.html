@@ -4,11 +4,11 @@
 
   {% if postaus.julkaistu == 'y' or user_logged_in %}
   <div class="pos" {% if user_logged_in %} style="margin-bottom: 1em;"{% endif %}>
-    <h1><a href="#">{{postaus.otsikko}}</a></h1>
+    <h1 style="color:#333333;">{{postaus.otsikko}}</h1>
 
     <p>{{postaus.leipateksti}}</p>
 
-    <p style="color: grey;">{{postaus.pvm|date("d.m.Y")}}</p>
+    <p style="color: #777777;">{{postaus.pvm|date("d.m.Y")}}</p>
 
     {% for kategoria in kategoriat %}
       <a href="{{base_path}}/kategoria/{{kategoria.nimi}}">{{kategoria.nimi}}</a> 

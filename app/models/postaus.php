@@ -89,7 +89,7 @@ class Postaus extends BaseModel {
   public function diztroy($iid) {
     $query = DB::connection()->prepare("DELETE FROM Postaus WHERE id = :id");
     $query->execute(array('id' => $iid));
-    Kint::dump($query);
+    //Kint::dump($query);
   }
 
   public static function kategorioittain($nimi) {

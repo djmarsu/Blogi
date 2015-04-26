@@ -2,10 +2,14 @@
 
 {% block content %}
 
-    <h1>{{kategoria.nimi}}</h1>
 
-    {% if kategoria.kuvaus %} <p>{{kategoria.kuvaus}}</p>{% endif %}
-    <a href="{{base_path}}/kategoria/{{kategoria.nimi}}/muokkaa" class="btn btn-default">Muokkaa</a>
+    {% if user_logged_in %}
+    <h1><a href="{{base_path}}/kategoria/{{kategoria.nimi}}/muokkaa">{{kategoria.nimi}}</a></h1>
+    {% else %}
+    <h1>{{kategoria.nimi}}</h1>
+    {% endif %}
+
+    {% if kategoria.kuvaus %} <p style="color:#333333;">{{kategoria.kuvaus}}</p>{% endif %}
 
     <ul style="list-style:none;padding:0;margin-top: 1em;">
     {% for postaus in postaukset %}
