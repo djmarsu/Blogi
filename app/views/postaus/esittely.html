@@ -6,7 +6,7 @@
   <div class="pos" {% if user_logged_in %} style="margin-bottom: 1em;"{% endif %}>
     <h1 style="color:#333333;">{{postaus.otsikko}}</h1>
 
-    <p>{{postaus.leipateksti}}</p>
+    {{postaus.leipateksti|nl2br}}
 
     <p style="color: #777777;">{{postaus.pvm|date("d.m.Y")}}</p>
 

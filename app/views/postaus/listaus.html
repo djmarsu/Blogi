@@ -33,7 +33,7 @@
     {% endif %}
     <h1><a href="{{base_path}}/postaus/{{postaus.id}}" {% if postaus.julkaistu == 'n' %}style="color:#333333;"{% endif %}>{{postaus.otsikko}}</a></h1>
 
-    <p>{{postaus.leipateksti}}</p>
+    {{postaus.leipateksti|nl2br}}
 
     <p style="color: #333333;">{{postaus.pvm|date("d.m.Y")}}</p>
   </div>
