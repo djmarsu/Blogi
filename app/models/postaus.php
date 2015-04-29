@@ -64,8 +64,6 @@ class Postaus extends BaseModel {
   }
 
   public function save() {
-    // HOX KÄYTÄ TÄTÄ $kayttaja = BaseController::get_user_logged_in();
-    //                $kayttaja->nimi
     $kayttaja_olio = BaseController::get_user_logged_in();
     $kayttaja = $kayttaja_olio->nimi;
     $query = DB::connection()->prepare("INSERT INTO Postaus (kayttaja, pvm, otsikko, leipateksti, julkaistu) VALUES (:kayttaja, current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
@@ -75,23 +73,13 @@ class Postaus extends BaseModel {
   }
 
   public function update($id) {
-//    $query = DB::connection()->prepare('UPDATE Postaus SET otsikko = :otsikko, leipateksti = :leipateksti, julkaistu = :julkaistu WHERE id = :id');
     $query = DB::connection()->prepare('UPDATE Postaus SET otsikko = :otsikko, leipateksti = :leipateksti, julkaistu = :julkaistu WHERE id = :id');
-//    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu, 'id' => $this->id));
-//    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'id' => $id));
     $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu, 'id' => $id));
-
-
-
-//    $query = DB::connection()->prepare("UPDATE Postaus SET otsikko = 'morjes', leipateksti = 'morjes2' WHERE id = :id");
-//    $query->execute(array('id' => $this->id));
-//    $row = $query->fetch();
   }
 
   public function diztroy($iid) {
     $query = DB::connection()->prepare("DELETE FROM Postaus WHERE id = :id");
     $query->execute(array('id' => $iid));
-    //Kint::dump($query);
   }
 
   public static function kategorioittain($nimi) {

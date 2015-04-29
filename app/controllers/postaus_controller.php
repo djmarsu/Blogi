@@ -1,12 +1,6 @@
 <?php
 
 class PostausController extends BaseController {
-/*
-    public static function index() {
-    $postaukset = Postaus::all();
-    View::make('postaus/listaus.html', array('postaukset' => $postaukset));
-  }
-*/
   public static function show($id) {
     $postaus = Postaus::find($id);
     $kategoriat = Kategoria::postauksen_kategoriat($id);
@@ -83,8 +77,6 @@ class PostausController extends BaseController {
 
     $postaus = new Postaus($attributes);
     $errors = $postaus->errors();
-//    Kint::dump($postaus);
-//    $postaus->update($id);
 
     if (count($errors) > 0) {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
