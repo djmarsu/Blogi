@@ -1,6 +1,6 @@
 <?php
 class Postaus extends BaseModel {
-  public $id, $blogi, $pvm, $otsikko, $leipateksti, $julkaistu;
+  public $id, $kayttaja, $pvm, $otsikko, $leipateksti, $julkaistu;
 
   public function __construct($attributes) {
     parent::__construct($attributes);
@@ -32,7 +32,7 @@ class Postaus extends BaseModel {
     foreach ($rows as $row) {
       $postaukset[] = new Postaus(array(
         'id' => $row['id'],
-        'blogi' => $row['blogi'],
+        'kayttaja' => $row['kayttaja'],
         'pvm' => $row['pvm'],
         'otsikko' => $row['otsikko'],
         'leipateksti' => $row['leipateksti'],
@@ -51,7 +51,7 @@ class Postaus extends BaseModel {
     if ($row) {
       $postaus = new Postaus(array(
         'id' => $row['id'],
-        'blogi' => $row['blogi'],
+        'kayttaja' => $row['kayttaja'],
         'pvm' => $row['pvm'],
         'otsikko' => $row['otsikko'],
         'leipateksti' => $row['leipateksti'],
@@ -66,8 +66,10 @@ class Postaus extends BaseModel {
   public function save() {
     // HOX KÄYTÄ TÄTÄ $kayttaja = BaseController::get_user_logged_in();
     //                $kayttaja->nimi
-    $query = DB::connection()->prepare("INSERT INTO Postaus (blogi, pvm, otsikko, leipateksti, julkaistu) VALUES ('koolo', current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
-    $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
+    $kayttaja_olio = BaseController::get_user_logged_in();
+    $kayttaja = $kayttaja_olio->nimi;
+    $query = DB::connection()->prepare("INSERT INTO Postaus (kayttaja, pvm, otsikko, leipateksti, julkaistu) VALUES (:kayttaja, current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
+    $query->execute(array('kayttaja' => $kayttaja, 'otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
     $row = $query->fetch();
     return $row['id'];
   }
