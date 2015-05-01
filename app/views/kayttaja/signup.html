@@ -11,6 +11,12 @@
   </div>
 {% endif %}
 
+{% if message %}
+<div class="alert alert-success">
+  {{message}}
+</div>
+{% endif %}
+
   <h1>Rekisteröidy</h1>
 
   <form action="{{base_path}}/signup" method="post">

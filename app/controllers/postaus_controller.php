@@ -34,7 +34,7 @@ class PostausController extends BaseController {
       $id = $postaus->save();
 
       $kategoriat = $params['kategoriat'];
-      KategoriaController::kategorizoi($kategoriat, $id);
+      KategoriaController::kategorizoi($kategoriat, $id, $attributes);
 
       Redirect::to('/postaus/' . $id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
@@ -87,7 +87,7 @@ class PostausController extends BaseController {
       $kategoriat = $params['kategoriat'];
       $kategoriat = trim($kategoriat); // huooooohhh tyhjät kategoriat = ei hyvä
       if (!empty($kategoriat)) {
-        KategoriaController::kategorizoi($kategoriat, $id);
+        KategoriaController::kategorizoi($kategoriat, $id, $attributes);
       }
       
       Redirect::to('/postaus/' . $id, array('message' => 'muokattu'));
@@ -104,6 +104,6 @@ class PostausController extends BaseController {
     $postaus->diztroy($postaus->id);
 //    $postaus = new Postaus(array('id' => $id));
 //    $postaus->destroy();
-    Redirect::to('/', array('message' => 'postaus poistettu'));
+    Redirect::to('/', array('message' => 'postaus ' . $postaus->otsikko .' poistettu'));
   }
 }

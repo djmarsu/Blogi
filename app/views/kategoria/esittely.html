@@ -19,4 +19,12 @@
     {% endfor %}
     </ul>
 
+{% if user_logged_in %}
+<form method="post" action="{{base_path}}/kategoria/{{kategoria.nimi}}/poista">
+    <button type="submit" style="float:left; margin-right: 1em" class="btn btn-danger">Poista</button>
+</form>
+
+<a href="{{base_path}}/kategoria/{{kategoria.nimi}}/muokkaa" class="btn btn-default">Muokkaa</a>
+{% endif %}
+
 {% endblock %}

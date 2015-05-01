@@ -10,8 +10,13 @@ class Kategoria extends BaseModel {
   public function validate_nimi() {
     $errors = array();
     if ($this->nimi == '' || $this->nimi == null) {
-        $errors[] = "kategorian nimi ei saa olla tyhjä";
+      $errors[] = "kategorian nimi ei saa olla tyhjä";
     }
+
+    if (strlen($this->nimi) > 50) {
+      $errors[] = "kategorian nimi on liian pitkä (50 merkkiä max.)";
+    }      
+
     return $errors;
   }
 
@@ -57,11 +62,11 @@ class Kategoria extends BaseModel {
     $query->execute(array('id' => $id));
   }
 
-  public static function destroy($juu) {
+  public static function destroy($nimi) {
     $query = DB::connection()->prepare('DELETE FROM PostauksenKategoria WHERE kategoriannimi = :nimi');
-    $query->execute(array('nimi' => $juu));
+    $query->execute(array('nimi' => $nimi));
     $query2 = DB::connection()->prepare('DELETE FROM Kategoria WHERE nimi = :nimi');
-    $query2->execute(array('nimi' => $juu));
+    $query2->execute(array('nimi' => $nimi));
   }
 
   public static function postauksen_kategoriat($postausid) {

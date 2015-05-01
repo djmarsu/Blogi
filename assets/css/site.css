@@ -50,3 +50,10 @@ label {
 h1 {
   font-size: 30px;
 }
+
+ul {
+  list-style-type: square;
+}
+
+li {
+list-style-type:square;}

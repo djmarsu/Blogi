@@ -17,6 +17,10 @@
     KategoriaController::update($nimi);
   });
 
+  $routes->post('/kategoria/:nimi/poista', 'check_logged_in', function($nimi) {
+    KategoriaController::destroy($nimi);
+  });
+
   $routes->get('/postaus/:id/muokkaa', 'check_logged_in', function($id) {
 	  PostausController::edit($id);
   });

@@ -15,8 +15,10 @@
 
       $kayttaja = new Kayttaja($attributes);
       $errors = $kayttaja->errors();  
- 
-      if (!Kayttaja::onko_kayttajaa()) {
+
+      $rekisterointi_auki = true;
+
+      if (!Kayttaja::onko_kayttajaa() || $rekisterointi_auki) {
         if (count($errors) == 0) {
           if (Kayttaja::find($kayttaja->nimi)) {
             Redirect::to('/', array('errors' => array("saman niminen ($kayttaja->nimi) käyttäjä on jo luotu mitä tehdä?")));

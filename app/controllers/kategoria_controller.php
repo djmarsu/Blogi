@@ -12,10 +12,7 @@ class KategoriaController extends BaseController {
     View::make('kategoria/esittely.html', array('kategoria' => $kategoria, 'postaukset' => $postaukset));
   }
 
-  public static function luokategoria($nimi) {
-  }
-
-  public static function kategorizoi($kategoriat, $postausid) {
+  public static function kategorizoi($kategoriat, $postausid, $attributes) {
     $kategoriapalaset = explode(",", $kategoriat);
     foreach ($kategoriapalaset as $kategoria) {
       if (!empty($kategoria)) {
@@ -23,8 +20,13 @@ class KategoriaController extends BaseController {
           'nimi' => $kategoria
         ));
 
-        $kategoria->luo();
-        $kategoria->liita_postaukseen($postausid);
+        $errors = $kategoria->errors();
+        if (count($errors) == 0) {
+          $kategoria->luo();
+          $kategoria->liita_postaukseen($postausid);
+        } else {
+          View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
       }
     }
 
@@ -67,6 +69,11 @@ class KategoriaController extends BaseController {
 
       Redirect::to('/kategoria/' . $nimi, array('message' => 'muokattu'));
     }
+  }
+
+  public static function destroy($nimi) {
+    Kategoria::destroy($nimi);
+    Redirect::to('/', array('message' => 'Kategoria ' . $nimi . ' poistettu'));
   }
 }
 
