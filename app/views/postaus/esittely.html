@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  {% if postaus.julkaistu == 'y' or user_logged_in %}
+{% if postaus.julkaistu == 'y' or user_logged_in %}
   <div class="pos" {% if user_logged_in %} style="margin-bottom: 1em;"{% endif %}>
     <h1 style="color:#333333;">{{postaus.otsikko}}</h1>
 
@@ -15,13 +15,11 @@
     {% endfor %}
   </div>
 
-{% if user_logged_in %}
-<form method="post" action="{{base_path}}/postaus/{{postaus.id}}/poista">
-    <button type="submit" style="float:left; margin-right: 1em" class="btn btn-danger">Poista</button>
-</form>
-
-<a href="{{base_path}}/postaus/{{postaus.id}}/muokkaa" class="btn btn-default">Muokkaa</a>
-{% endif %}
-
+  {% if user_logged_in %}
+    <form method="post" action="{{base_path}}/postaus/{{postaus.id}}/poista">
+      <button type="submit" style="float:left; margin-right: 1em" class="btn btn-danger">Poista</button>
+    </form>
+    <a href="{{base_path}}/postaus/{{postaus.id}}/muokkaa" class="btn btn-default">Muokkaa</a>
   {% endif %}
+{% endif %}
 {% endblock %}

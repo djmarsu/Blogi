@@ -81,9 +81,9 @@ class Postaus extends BaseModel {
     $query->execute(array('otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu, 'id' => $id));
   }
 
-  public function diztroy($iid) {
+  public function destroy($id) {
     $query = DB::connection()->prepare("DELETE FROM Postaus WHERE id = :id");
-    $query->execute(array('id' => $iid));
+    $query->execute(array('id' => $id));
   }
 
   public static function kategorioittain($nimi) {

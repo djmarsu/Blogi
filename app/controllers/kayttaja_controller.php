@@ -21,11 +21,11 @@
       if (!Kayttaja::onko_kayttajaa() || $rekisterointi_auki) {
         if (count($errors) == 0) {
           if (Kayttaja::find($kayttaja->nimi)) {
-            Redirect::to('/', array('errors' => array("saman niminen ($kayttaja->nimi) käyttäjä on jo luotu mitä tehdä?")));
+            Redirect::to('/', array('errors' => array("saman niminen ($kayttaja->nimi) käyttäjä on jo luotu, valitse toinen nimi")));
           } else {
             $nimi = Kayttaja::create($attributes);
             $_SESSION['nimi'] = $attributes['nimi'];
-            Redirect::to('/', array('message' => "olet nyt rekisteröitynyt (kirjaudutin sisään)!"));
+            Redirect::to('/', array('message' => "olet nyt rekisteröitynyt"));
           }
         } else {
           View::make('kayttaja/signup.html', array('errors' => $errors));

@@ -19,11 +19,10 @@ class Kategoria extends BaseModel {
 
 
   public static function all() {
-    // mitenköhän tän tekis järkevämmin
     if (!BaseController::get_user_logged_in()) {
       $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id AND Postaus.julkaistu = 'y' ORDER BY PostauksenKategoria.kategoriannimi ASC");
-     } else {
-    $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id ORDER BY PostauksenKategoria.kategoriannimi ASC");
+    } else {
+      $query = DB::connection()->prepare("SELECT DISTINCT PostauksenKategoria.kategoriannimi FROM PostauksenKategoria, Postaus WHERE PostauksenKategoria.postausID = Postaus.id ORDER BY PostauksenKategoria.kategoriannimi ASC");
     }
     $query->execute();
     $rows = $query->fetchAll();

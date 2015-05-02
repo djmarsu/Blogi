@@ -14,17 +14,17 @@ class PostausController extends BaseController {
   public static function store() {
     $params = $_POST;
 
-    $blii = 'n';
+    $julkaistu = 'n';
 
-    if (isset($_POST['julkaistu']) && $_POST['julkaistu'] == 'jees') {
-      $blii = 'y';
+    if (isset($params['julkaistu']) && $params['julkaistu'] == 'jees') {
+      $julkaistu = 'y';
     }
 
     $attributes = array(
       'blogi' => 'koolo',
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
-      'julkaistu' => $blii
+      'julkaistu' => $julkaistu
     );
 
     $postaus = new Postaus($attributes);
@@ -61,10 +61,9 @@ class PostausController extends BaseController {
   public static function update($id) {
     $params = $_POST;
     
-    // TODO on tääki vaikeesti tehty hohhoijaa
-    $blii = 'n';
-    if (isset($_POST['julkaistu'])) {
-      $blii = 'y';
+    $juklaistu = 'n';
+    if (isset($params['julkaistu'])) {
+      $julkaistu = 'y';
     }
 
     $attributes = array(
@@ -72,7 +71,7 @@ class PostausController extends BaseController {
       'id' => $id,
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
-      'julkaistu' => $blii
+      'julkaistu' => $julkaistu
     );
 
     $postaus = new Postaus($attributes);
@@ -82,10 +81,9 @@ class PostausController extends BaseController {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
     } else {
       $postaus->update($id);
-      // TODO mihin kohtaan tän laittas,,tähän vai modeliin,onko toi poista_postaus ees model vai controller apuaaa
       Kategoria::poista_postaus($id);
       $kategoriat = $params['kategoriat'];
-      $kategoriat = trim($kategoriat); // huooooohhh tyhjät kategoriat = ei hyvä
+      $kategoriat = trim($kategoriat);
       if (!empty($kategoriat)) {
         KategoriaController::kategorizoi($kategoriat, $id, $attributes);
       }
@@ -101,9 +99,7 @@ class PostausController extends BaseController {
     foreach ($kategoriaz as $kategoria) {
       Kategoria::poista_postaus($id);
     }
-    $postaus->diztroy($postaus->id);
-//    $postaus = new Postaus(array('id' => $id));
-//    $postaus->destroy();
+    $postaus->destroy($postaus->id);
     Redirect::to('/', array('message' => 'postaus ' . $postaus->otsikko .' poistettu'));
   }
 }
