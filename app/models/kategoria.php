@@ -9,13 +9,10 @@ class Kategoria extends BaseModel {
 
   public function validate_nimi() {
     $errors = array();
+
     if ($this->nimi == '' || $this->nimi == null) {
       $errors[] = "kategorian nimi ei saa olla tyhjä";
     }
-
-    if (strlen($this->nimi) > 50) {
-      $errors[] = "kategorian nimi on liian pitkä (50 merkkiä max.)";
-    }      
 
     return $errors;
   }

@@ -13,11 +13,12 @@ CREATE TABLE Postaus(
 );
 
 CREATE TABLE Kategoria(
-  nimi varchar(50) PRIMARY KEY,
+  nimi TEXT PRIMARY KEY,
   kuvaus TEXT
 );
 
 CREATE TABLE PostauksenKategoria(
   postausID integer NOT NULL REFERENCES Postaus(id),
-  kategoriannimi varchar(50) NOT NULL REFERENCES Kategoria(nimi)
+  kategoriannimi TEXT NOT NULL REFERENCES Kategoria(nimi),
+  PRIMARY KEY (postausID, kategoriannimi)
 );

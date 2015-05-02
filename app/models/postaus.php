@@ -20,6 +20,10 @@ class Postaus extends BaseModel {
     if ($this->otsikko == '' || $this->otsikko == null) {
       $errors[] = "ei saa olla tyhjä otsikko";
     }
+
+    if (strlen($this->otsikko) > 200) {
+      $errors[] = "otsikon pituus ylittää rajan (200 merkkiä)!!";
+    }
     return $errors;
   }
 
