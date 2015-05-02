@@ -62,7 +62,6 @@ class Kayttaja extends BaseModel {
     return null;
   }
 
-  // TODO turhaa toistoa? täähän on melkeen ku find..
   public static function onko_kayttajaa() {
     // huippu jättää limit tohon niin ei tarvi sitten rivejä käydä läpi..emt
     $query = DB::connection()->prepare('SELECT * FROM Kayttaja LIMIT 1');

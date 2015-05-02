@@ -81,8 +81,6 @@ class Kategoria extends BaseModel {
   public function luo() {
     $query = DB::connection()->prepare("INSERT INTO Kategoria (nimi) VALUES (:nimi) RETURNING nimi");
     $query->execute(array('nimi' => $this->nimi));
-    $row = $query->fetch();
-    /* tässä piti jotakin tehä */
   }
 
   public function liita_postaukseen($postausid) {

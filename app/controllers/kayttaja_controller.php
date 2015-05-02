@@ -31,7 +31,6 @@
           View::make('kayttaja/signup.html', array('errors' => $errors));
         }
       } else {
-//         Redirect::to('/login', array('errors' => array("käyttäjä on jo tehty, ota yhteys sql tukihenkilöön/vastaavaan")));
         View::make('kayttaja/login.html', array('errors' => array("käyttäjä on jo tehty, ota yhteys sql tukihenkilöön/vastaavaan")));
       }
     }

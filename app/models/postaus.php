@@ -68,10 +68,8 @@ class Postaus extends BaseModel {
   }
 
   public function save() {
-    $kayttaja_olio = BaseController::get_user_logged_in();
-    $kayttaja = $kayttaja_olio->nimi;
     $query = DB::connection()->prepare("INSERT INTO Postaus (kayttaja, pvm, otsikko, leipateksti, julkaistu) VALUES (:kayttaja, current_date, :otsikko, :leipateksti, :julkaistu) RETURNING id");
-    $query->execute(array('kayttaja' => $kayttaja, 'otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
+    $query->execute(array('kayttaja' => $this->kayttaja, 'otsikko' => $this->otsikko, 'leipateksti' => $this->leipateksti, 'julkaistu' => $this->julkaistu));
     $row = $query->fetch();
     return $row['id'];
   }

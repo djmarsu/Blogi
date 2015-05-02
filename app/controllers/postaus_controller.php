@@ -20,8 +20,11 @@ class PostausController extends BaseController {
       $julkaistu = 'y';
     }
 
+    $kayttaja_olio = BaseController::get_user_logged_in();
+    $kayttaja = $kayttaja_olio->nimi;
+
     $attributes = array(
-      'blogi' => 'koolo',
+      'kayttaja' => $kayttaja,
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
       'julkaistu' => $julkaistu
@@ -44,8 +47,6 @@ class PostausController extends BaseController {
 
   public static function edit($id) {
     $postaus = Postaus::find($id);
-    // TODO korjaa tää joskus aiva kauheen näkönen...
-    // mutta ei jaksa käyttää javascriptiä????
     $kategoriatruma = Kategoria::postauksen_kategoriat($id);
     $kategoriat = "";
     foreach ($kategoriatruma as $kategoria) {
@@ -61,14 +62,17 @@ class PostausController extends BaseController {
   public static function update($id) {
     $params = $_POST;
     
-    $juklaistu = 'n';
+    $julkaistu = 'n';
     if (isset($params['julkaistu'])) {
       $julkaistu = 'y';
     }
 
+    $kayttaja_olio = BaseController::get_user_logged_in();
+    $kayttaja = $kayttaja_olio->nimi;
+
     $attributes = array(
-      'blogi' => 'koolo',
       'id' => $id,
+      'kayttaja' => $kayttaja,
       'otsikko' => $params['otsikko'],
       'leipateksti' => $params['leipateksti'],
       'julkaistu' => $julkaistu
