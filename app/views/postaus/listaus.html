@@ -20,10 +20,6 @@
   </div>
 {% endif %}
 
-{% if user_logged_in %}
-<a href="{{base_path}}/postaus/uusi">Lisää uusi</a>
-{% endif %}
-
 {% for postaus in postaukset %}
   {% if postaus.julkaistu == 'y' or user_logged_in %}
     {% if postaus.julkaistu == 'n' %}

@@ -9,17 +9,10 @@ Yleisiä linkkejä:
 
 Blogi vaan
 
-### Linkkejä esimerkkisivuille
-
-* [Etusivu](http://xnix.users.cs.helsinki.fi/prujusto/)
-* [Listaussivu](http://xnix.users.cs.helsinki.fi/prujusto/listaus)
-* [Postaus](http://xnix.users.cs.helsinki.fi/prujusto/postaus)
-* [Postauksen muokkaus](http://xnix.users.cs.helsinki.fi/prujusto/postaus/muokkaa)
-
 ### Tunnus ja salasana
 
-nimi: niku
-salasana: joo
+* nimi: niku
+* salasana: joo
 
 ### Lisenssi
 
