@@ -16,7 +16,7 @@
       $kayttaja = new Kayttaja($attributes);
       $errors = $kayttaja->errors();  
 
-      $rekisterointi_auki = true;
+      $rekisterointi_auki = false;
 
       if (!Kayttaja::onko_kayttajaa() || $rekisterointi_auki) {
         if (count($errors) == 0) {
