@@ -5,7 +5,6 @@
   }
 
   $routes->get('/', function() {
-//    PostausController::index();
     BlogiController::index();
   });
 
@@ -13,7 +12,7 @@
     KategoriaController::edit($nimi);
   });
 
-  $routes->post('/kategoria/:nimi/muokkaa', function($nimi) {
+  $routes->post('/kategoria/:nimi/muokkaa', 'check_logged_in', function($nimi) {
     KategoriaController::update($nimi);
   });
 
@@ -25,7 +24,7 @@
 	  PostausController::edit($id);
   });
 
-  $routes->post('/postaus/:id/muokkaa', function($id) {
+  $routes->post('/postaus/:id/muokkaa', 'check_logged_in', function($id) {
     PostausController::update($id);
   });
 
@@ -33,7 +32,7 @@
     PostausController::destroy($id);
   });
 
-  $routes->post('/postaus/uusi', function() {
+  $routes->post('/postaus/uusi', 'check_logged_in', function() {
     PostausController::store();
   });
 
@@ -53,14 +52,6 @@
     KayttajaController::handle_login();
   });
 
-  $routes->get('/prujulistaus', function() {
-    HelloWorldController::prujulistaus();
-  });
-
-  $routes->get('/edit', function() {
-    HelloWorldController::edit();
-  });
-
   $routes->post('/signup', function() {
     KayttajaController::register();
   });
@@ -69,19 +60,11 @@
     KayttajaController::signup();
   });
 
-  $routes->post('/logout', function() {
+  $routes->post('/logout', 'check_logged_in', function() {
     KayttajaController::logout();
   });
 
-  $routes->get('/kokeilu', function() {
-		BlogiController::showkokeilu();
-	});
-
-  $routes->get('/blogi/:nimi', function($nimi) {
-    BlogiController::show($nimi);
-  });
-
-  $routes->get('/postaus/:id', function($id) { // pitääkö tän olla perimmäisenäää????????
+  $routes->get('/postaus/:id', function($id) {
     PostausController::show($id);
   });
 
@@ -93,4 +76,3 @@
     KategoriaController::show($nimi);
   });
 
- 
