@@ -6,7 +6,11 @@ class BlogiController extends BaseController {
       View::make('kayttaja/signup.html');
     } else {
       $postaukset = Postaus::all();
-      View::make('postaus/listaus.html', array('postaukset' => $postaukset));
+      if (!$postaukset) {
+        View::make('postaus/listaus.html', array('message' => 'blogissa ei ole vielä yhtään postausta!'));
+      } else {
+        View::make('postaus/listaus.html', array('postaukset' => $postaukset));
+      }
     }
   }
 }

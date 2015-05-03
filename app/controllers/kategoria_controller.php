@@ -3,7 +3,11 @@
 class KategoriaController extends BaseController {
   public static function listaa() {
     $kategoriat = Kategoria::all();
-    View::make('kategoria/listaus.html', array('kategoriat' => $kategoriat));
+    if (!$kategoriat) {
+      View::make('kategoria/listaus.html', array('message' => 'blogissa ei ole vielä yhtään kategoriaa'));
+    } else {
+      View::make('kategoria/listaus.html', array('kategoriat' => $kategoriat));
+    }
   }
 
   public static function show($nimi) {
