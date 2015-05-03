@@ -11,8 +11,8 @@
     }
 
     public static function check_logged_in() {
-        if (!isset($_SESSION['nimi'])) {
-            Redirect::to('/login', array('message' => 'Kirjaudu sisään'));
-        }
+      if (!isset($_SESSION['nimi'])) {
+        Redirect::to('/login', array('message' => 'Kirjaudu sisään'));
+      }
     }
   }
