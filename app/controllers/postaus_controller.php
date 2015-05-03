@@ -82,12 +82,13 @@ class PostausController extends BaseController {
     $errors = $postaus->errors();
 
     if (count($errors) > 0) {
-      View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'kategoriat' => $params['kategoriat']));
     } else {
       $postaus->update($id);
       Kategoria::poista_postaus($id);
       $kategoriat = $params['kategoriat'];
       $kategoriat = trim($kategoriat);
+      $kategoriat = ltrim($kategoriat);
       if (!empty($kategoriat)) {
         KategoriaController::kategorizoi($kategoriat, $id, $attributes);
       }
