@@ -63,7 +63,7 @@ class Kayttaja extends BaseModel {
   }
 
   public static function onko_kayttajaa() {
-    $query = DB::connection()->prepare('SELECT * FROM Kayttaja LIMIT 1');
+    $query = DB::connection()->prepare('SELECT nimi FROM Kayttaja LIMIT 1');
     $query->execute();
     $row = $query->fetch();
 

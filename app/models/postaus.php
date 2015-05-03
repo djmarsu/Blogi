@@ -85,7 +85,7 @@ class Postaus extends BaseModel {
   }
 
   public static function kategorioittain($nimi) {
-    $query = DB::connection()->prepare('SELECT * FROM PostauksenKategoria WHERE kategoriannimi = :nimi');
+    $query = DB::connection()->prepare('SELECT postausid FROM PostauksenKategoria WHERE kategoriannimi = :nimi');
     $query->execute(array('nimi' => $nimi));
     $rows = $query->fetchAll();
     $postaukset = array();
