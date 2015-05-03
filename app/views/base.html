@@ -21,6 +21,7 @@
           <ul class="nav navbar-nav">
             <li><a href="{{base_path}}">Etusivu</a></li>
             <li><a href="{{base_path}}/kategoriat">Kategoriat</a></li>
+            {% if user_logged_in %}<li><a href="{{base_path}}/postaus/uusi">Lisää uusi postaus</a></li>{% endif %}
           </ul>
 
           {% if user_logged_in %}

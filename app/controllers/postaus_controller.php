@@ -41,7 +41,7 @@ class PostausController extends BaseController {
 
       Redirect::to('/postaus/' . $id, array('message' => 'Postaus lisätty onnistuneesti!'));
     } else{
-      View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+      View::make('postaus/uusi.html', array('errors' => $errors, 'attributes' => $attributes, 'kategoriat' => $params['kategoriat']));
     }
   }
 
@@ -85,10 +85,9 @@ class PostausController extends BaseController {
       View::make('postaus/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'kategoriat' => $params['kategoriat']));
     } else {
       $postaus->update($id);
-      Kategoria::poista_postaus($id);
+      Kategoria::poista_postauksen_kategoriat($id);
       $kategoriat = $params['kategoriat'];
       $kategoriat = trim($kategoriat);
-      $kategoriat = ltrim($kategoriat);
       if (!empty($kategoriat)) {
         KategoriaController::kategorizoi($kategoriat, $id, $attributes);
       }
@@ -102,7 +101,7 @@ class PostausController extends BaseController {
     $kategoriaz = Kategoria::postauksen_kategoriat($id);
 
     foreach ($kategoriaz as $kategoria) {
-      Kategoria::poista_postaus($id);
+      Kategoria::poista_postauksen_kategoriat($id);
     }
     $postaus->destroy($postaus->id);
     Redirect::to('/', array('message' => 'postaus ' . $postaus->otsikko .' poistettu'));

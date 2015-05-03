@@ -15,6 +15,7 @@ class KategoriaController extends BaseController {
   public static function kategorizoi($kategoriat, $postausid, $attributes) {
     $kategoriapalaset = explode(",", $kategoriat);
     foreach ($kategoriapalaset as $kategoria) {
+      $kategoria = trim($kategoria);
       if (!empty($kategoria)) {
         $kategoria = new Kategoria(array(
           'nimi' => $kategoria
@@ -29,7 +30,6 @@ class KategoriaController extends BaseController {
         }
       }
     }
-
   }
 
   public static function edit($nimi) {
@@ -59,7 +59,7 @@ class KategoriaController extends BaseController {
         $postaukset = Postaus::kategorioittain($nimi);
 
         foreach ($postaukset as $postaus) {
-          Kategoria::poista_postaus($postaus->id);
+          Kategoria::poista_postauksen_kategoriat($postaus->id);
           $kategoria->luo();
           $kategoria->liita_postaukseen($postaus->id);
           $kategoria->update($nimi);

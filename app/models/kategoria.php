@@ -53,7 +53,7 @@ class Kategoria extends BaseModel {
     return null;
   }
 
-  public static function poista_postaus($id) {
+  public static function poista_postauksen_kategoriat($id) {
     $query = DB::connection()->prepare('DELETE FROM PostauksenKategoria WHERE postausID = :id');
     $query->execute(array('id' => $id));
   }
